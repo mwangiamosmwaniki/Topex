@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .login-container {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    background: #b8012e;
+  }
+
+  .login-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+
+  .form-label {
+    color: #fff;
+  }
+
+  .btn-primary{
+      background: #fff;
+      color: black;
+      border-radius: 25px;
+  }
+  .btn-primary:hover{
+    background: #EDEADE;
+    color: #b8012e;
+  }
+  @keyframes slideFadeIn {
+    0%   { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .alert.login-alert {
+    animation: slideFadeIn 0.4s ease forwards;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  .alert-error {
+    background-color: #dc3545;
+  }
+
+  .alert-success {
+    background-color: #28a745;
+  }
+
+  .alert-info {
+    background-color: #17a2b8;
+  }
+
+  .login-alert i {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+  }
+
+  .btn-close {
+    filter: invert(1);
+  }
+
+  /* Responsive styles */
+  @media (max-width: 576px) {
+    .login-container {
+      margin: 2rem 1rem;
+      padding: 1.5rem;
+    }
+
+    .login-title {
+      font-size: 1.5rem;
+    }
+
+    .form-control {
+      font-size: 1rem;
+    }
+
+    .btn {
+      font-size: 1rem;
+      padding: 0.6rem;
+    }
+
+    .alert.login-alert {
+      font-size: 0.95rem;
+      padding: 0.75rem;
+    }
+
+    .login-alert i {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<div class="login-container">
+  <h2 class="login-title">User Login</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.level_tag in 'error infosuccess' %}
+        {% if message.level_tag == 'error' %}
+          <div class="alert alert-error login-alert alert-dismissible fade show" role="alert" data-autohide="true">
+            <i class="bi bi-x-circle-fill"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% elif message.level_tag == 'success' %}
+          <div class="alert alert-success login-alert alert-dismissible fade show" role="alert" data-autohide="true">
+            <i class="bi bi-check-circle-fill"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% else %}
+          <div class="alert alert-info login-alert alert-dismissible fade show" role="alert" data-autohide="true">
+            <i class="bi bi-info-circle-fill"></i> {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="username" class="form-label">Admission Number</label>
+      <input type="text" class="form-control" name="username" id="username" placeholder="e.g. ADM001" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password" required>
+    </div>
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Auto-dismiss alerts after 4 seconds
+  document.querySelectorAll('.alert[data-autohide="true"]').forEach(function (el) {
+    setTimeout(function () {
+      const alert = bootstrap.Alert.getOrCreateInstance(el);
+      alert.close();
+    }, 4000);
+  });
+</script>
+{% endblock %}

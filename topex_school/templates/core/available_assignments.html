@@ -1,0 +1,40 @@
+{% extends "core/students/base.html" %}
+{% load core_extras %}  {# This loads dict_get filter #}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4 text-primary">Assignments</h2>
+
+  {% if assignments %}
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for assignment in assignments %}
+        <div class="col">
+          <div class="card h-100 shadow-sm assignment-card">
+            <div class="card-body">
+              <h5 class="card-title text-success">{{ assignment.unit.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ assignment.title }}</h6>
+              <p class="card-text"><strong>Due:</strong> {{ assignment.due_date|date:"M d, Y H:i" }}</p>
+
+              {% with submission=submissions_dict|dict_get:assignment.id %}
+                {% if submission %}
+                  {% if submission.grade %}
+                    <p><strong>Grade:</strong> {{ submission.grade }}</p>
+                  {% else %}
+                    <p><em>Submitted - waiting for grading</em></p>
+                  {% endif %}
+                {% else %}
+                  <a href="{% url 'core:submit_assignment' assignment.id %}" class="btn btn-sm btn-outline-primary">Submit</a>
+                {% endif %}
+              {% endwith %}
+
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-muted">No assignments available.</p>
+  {% endif %}
+</div>
+{% endblock content %}
+

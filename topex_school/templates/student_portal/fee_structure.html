@@ -1,0 +1,26 @@
+{% extends 'student_portal/base.html' %}
+{% block content %}
+<div class="container py-4">
+  <h2>Fee Structure</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Amount (KES)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in structure %}
+      <tr>
+        <td>{{ item.description }}</td>
+        <td>{{ item.amount }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <th>Total</th>
+        <th>{{ total_amount }}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends 'lecturers/base.html' %}
+{% block content %}
+<style>
+  .edit-form {
+    background-color: var(--card-bg-light);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    max-width: 700px;
+    margin: auto;
+  }
+
+  body.dark-mode .edit-form {
+    background-color: var(--card-bg-dark);
+    color: var(--text-light);
+  }
+
+  .edit-form label {
+    font-weight: 600;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  .edit-form input, .edit-form select, .edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+
+  body.dark-mode .edit-form input,
+  body.dark-mode .edit-form textarea,
+  body.dark-mode .edit-form select {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #eee;
+  }
+
+  .form-actions {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+  }
+
+  .update-btn {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .update-btn:hover {
+    background-color: #1e4bb8;
+  }
+
+  .cancel-link {
+    margin-left: 20px;
+    color: #6b7280;
+    text-decoration: underline;
+  }
+
+  .cancel-link:hover {
+    color: #374151;
+  }
+</style>
+
+<div class="content">
+  <h2 class="text-2xl font-bold mb-6 text-center">📝 Edit Uploaded Note</h2>
+
+  <form method="post" enctype="multipart/form-data" class="edit-form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}
+      {% if field.help_text %}
+        <small class="text-gray-500">{{ field.help_text }}</small>
+      {% endif %}
+      {% for error in field.errors %}
+        <p class="text-red-600 text-sm">{{ error }}</p>
+      {% endfor %}
+    {% endfor %}
+
+    <div class="form-actions">
+      <button type="submit" class="update-btn">Update</button>
+      <a href="{% url 'lecturers:upload_materials' %}" class="cancel-link">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'student_portal/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container py-4">
+  <h2>Semester Registration</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div 
+        class="alert 
+          {% if message.tags == 'error' %}alert-danger{% endif %}
+          {% if message.tags == 'success' %}alert-success{% endif %}
+          {% if message.tags == 'warning' %}alert-warning{% endif %}
+          {% if message.tags == 'info' %}alert-info{% endif %}
+        alert-dismissible fade show" role="alert" data-autohide="true">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Register</button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.alert[data-autohide="true"]').forEach(function(alert) {
+      setTimeout(function() {
+        let bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+        bsAlert.close();
+      }, 4000);  // 4000ms = 4 seconds
+    });
+  });
+</script>
+{% endblock %}

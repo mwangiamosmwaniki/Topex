@@ -1,0 +1,62 @@
+{% extends 'lecturers/base.html' %}
+{% block content %}
+<style>
+  .message-card {
+    border: none;
+    background-color: var(--card-bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+
+  body.dark-mode .message-card {
+    background-color: var(--card-bg-dark);
+    color: var(--text-light);
+  }
+
+  .message-subject {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+  }
+
+  .message-body {
+    color: var(--text-dark);
+    margin-bottom: 5px;
+  }
+
+  body.dark-mode .message-body {
+    color: var(--text-light);
+  }
+
+  .message-time {
+    font-size: 0.85rem;
+    color: gray;
+  }
+
+  body.dark-mode .message-time {
+    color: #ccc;
+  }
+</style>
+
+<div class="mb-4">
+  <h2 class="fw-bold">📨 Messages</h2>
+</div>
+
+{% if messages %}
+  {% for msg in messages %}
+    <div class="message-card">
+      <div class="message-subject">{{ msg.subject }}</div>
+      <div class="message-body">{{ msg.body }}</div>
+      <div class="message-time">{{ msg.timestamp|date:"M d, Y H:i" }}</div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="alert alert-info" role="alert">
+    No messages found.
+  </div>
+{% endif %}
+{% endblock %}

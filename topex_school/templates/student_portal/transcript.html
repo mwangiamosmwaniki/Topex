@@ -1,0 +1,28 @@
+{% extends 'student_portal/base.html' %}
+{% block content %}
+<div class="container py-4">
+  <h2>Exam Transcripts</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Unit</th>
+        <th>Grade</th>
+        <th>Semester</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for result in transcripts %}
+      <tr>
+        <td>{{ result.unit.title }}</td>
+        <td>{{ result.grade }}</td>
+        <td>{{ result.semester }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No transcripts available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

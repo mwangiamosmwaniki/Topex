@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="courses" id="courses">
+    <div class="courses-content">
+        <h2>OUR MAIN COURSES</h2>
+        <p class="courses-subtitle">Comprehensive education programs designed for student success</p>
+        
+        <div class="courses-grid">
+            {% for course in courses %}
+            <div class="course-card">
+                <div class="course-image">
+                    <p>{{ course.category }}</p>
+                </div>
+                <div class="course-content">
+                    <div class="course-category">{{ course.category }}</div>
+                    <div class="course-title">{{ course.name }}</div>
+                    <div class="course-description">{{ course.description }}</div>
+                    <button class="apply-btn">APPLY NOW</button>
+                </div>
+            </div>
+            {% empty %}
+            <p>No courses available at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

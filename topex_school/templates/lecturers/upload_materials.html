@@ -1,0 +1,120 @@
+{% extends 'lecturers/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+/* ---------- core styles  ---------- */
+.upload-form{background:rgba(161,159,159,.75);padding:20px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+body.dark-mode .upload-form{background:var(--card-bg-dark);color:var(--text-light)}
+.form-label{font-weight:600;margin-bottom:6px;display:block;color:#333}
+body.dark-mode .form-label{color:var(--text-light)}
+.upload-btn{margin:10px auto;background:#c41e3a;color:#fff;padding:10px 24px;border-radius:8px;border:none;transition:background .3s}
+.upload-btn:hover{background:#a9182f}
+
+.material-section{background:var(--card-bg-light);padding:15px;border-radius:8px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+body.dark-mode .material-section{background:var(--card-bg-dark);color:var(--text-light)}
+.material-section h4{color:#c41e3a;font-weight:bold}
+.material-links a{margin-left:8px;font-weight:500}
+.alert{animation:slideFadeIn .4s ease}
+
+@keyframes slideFadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- medium screens ≤ 992 px ---------- */
+@media (max-width:992px){
+  .upload-form{padding:18px}
+  .grid-cols-1,
+  .grid-cols-3{grid-template-columns:1fr 1fr !important}        /* 2‑column grid */
+  .form-label{font-size:.9rem}
+  .upload-btn{padding:9px 22px;font-size:.95rem}
+}
+
+/* ---------- small screens ≤ 576 px ---------- */
+@media (max-width:576px){
+  .upload-form{padding:15px}
+  .grid-cols-1,
+  .grid-cols-3{grid-template-columns:1fr !important}             /* stack inputs */
+  .upload-btn{width:100%;font-size:.9rem}
+  .material-section{padding:12px}
+  .material-section h4{font-size:1rem}
+  .material-links a{display:inline-block;margin-left:0;margin-right:6px}
+}
+</style>
+
+<div class="ml-0 md:ml-64 p-4 md:p-8 transition-all duration-300">
+  <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-6">📚 Upload Unit Materials</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4" role="alert" data-autohide="true">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data" class="upload-form mb-10">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+      <div>
+        <label class="form-label">{{ form.unit.label }}</label>
+        {{ form.unit|add_class:"w-full p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-800" }}
+      </div>
+      <div>
+        <label class="form-label">{{ form.week.label }}</label>
+        {{ form.week|add_class:"w-full p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-800" }}
+      </div>
+      <div>
+        <label class="form-label">{{ form.file.label }}</label>
+        {{ form.file|add_class:"w-full p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-800" }}
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="form-label">{{ form.title.label }}</label>
+      {{ form.title|add_class:"w-full p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-800" }}
+    </div>
+    <div class="mb-6">
+      <label class="form-label">{{ form.topic.label }}</label>
+      {{ form.topic|add_class:"w-full p-2 rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-800" }}
+    </div>
+
+    <button type="submit" class="upload-btn">
+      <i class="fa-solid fa-upload"></i> Upload
+    </button>
+  </form>
+
+  <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-5">🗂 Uploaded Materials (by Week)</h3>
+
+  {% for week, notes in materials_by_week.items %}
+    <div class="material-section">
+      <h4 class="mb-2">Week {{ week }}</h4>
+      <ul class="list-disc pl-6 text-sm">
+        {% for note in notes %}
+          <li class="mb-2">
+            <strong>{{ note.unit.code }}</strong> - {{ note.title }} ({{ note.topic }})
+            <span class="material-links text-sm">
+              | <a href="{{ note.file.url }}" class="text-blue-600 hover:underline" target="_blank">View</a>
+              | <a href="{% url 'lecturers:edit_note' note.pk %}" class="text-yellow-600 hover:underline">Edit</a>
+              | <a href="{% url 'lecturers:delete_note' note.pk %}" class="text-red-600 hover:underline">Delete</a>
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% empty %}
+    <div class="text-gray-600 dark:text-gray-300 bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 p-4 rounded">
+      No materials uploaded yet.
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.alert[data-autohide]')?.forEach(alert => {
+      setTimeout(() => bootstrap.Alert.getOrCreateInstance(alert).close(), 4000);
+    });
+  });
+</script>
+{% endblock %}

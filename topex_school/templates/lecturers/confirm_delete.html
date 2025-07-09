@@ -1,0 +1,66 @@
+{% extends 'lecturers/base.html' %}
+{% block content %}
+<style>
+  .delete-box {
+    background-color: var(--card-bg-light);
+    padding: 30px;
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  body.dark-mode .delete-box {
+    background-color: var(--card-bg-dark);
+    color: var(--text-light);
+  }
+
+  .delete-box h2 {
+    color: #dc2626;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .delete-box p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  .delete-btn {
+    background-color: #dc2626;
+    color: white;
+    padding: 10px 24px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .delete-btn:hover {
+    background-color: #b91c1c;
+  }
+
+  .cancel-link {
+    margin-left: 20px;
+    color: #6b7280;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  .cancel-link:hover {
+    color: #374151;
+  }
+</style>
+
+<div class="delete-box">
+  <h2>🗑️ Confirm Deletion</h2>
+  <p>Are you sure you want to delete the note titled <strong>"{{ note.title }}"</strong>?</p>
+  
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="delete-btn">Yes, Delete</button>
+    <a href="{% url 'lecturers:upload_materials' %}" class="cancel-link">Cancel</a>
+  </form>
+</div>
+{% endblock %}

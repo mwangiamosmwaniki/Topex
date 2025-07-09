@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h3>Results for {{ applicant.full_name }}</h3>
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Unit</th>
+        <th>Score</th>
+        <th>Grade</th>
+        <th>Semester</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+        <tr>
+          <td>{{ r.unit_name }}</td>
+          <td>{{ r.score }}</td>
+          <td>{{ r.grade }}</td>
+          <td>{{ r.semester }}</td>
+          <td>{{ r.academic_year }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

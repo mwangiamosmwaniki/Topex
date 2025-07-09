@@ -1,0 +1,30 @@
+{% extends 'lecturers/base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <!-- Header with Create button -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4">
+    <h2 class="text-primary mb-2 mb-md-0">All Assignments</h2>
+    <a href="{% url 'lecturers:create_assignment' %}" class="btn btn-success">
+      <i class="fas fa-plus me-1"></i> Create Assignment
+    </a>
+  </div>
+
+  {% if assignments %}
+    <div class="row g-4">
+      {% for assignment in assignments %}
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card custom-form-card h-100 p-3">
+            <h5 class="card-title">{{ assignment.unit.code }}: {{ assignment.title }}</h5>
+            <p class="mb-1"><strong>Due:</strong> {{ assignment.due_date }}</p>
+            <a href="{% url 'lecturers:assignment_submissions' assignment.id %}" class="btn btn-outline-primary btn-sm mt-2">
+              View Submissions
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No assignments uploaded yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

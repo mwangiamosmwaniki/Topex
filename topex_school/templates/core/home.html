@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home | Topex High School{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="swiper-container hero-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="{% static 'images/hero1.jpg' %}" alt="Hero Image 1">
+                    <div class="slide-caption">
+                        <h2 style="color: black">A Safe and Nurturing Environment</h2>
+                        <p style="color: black">Where every child is valued.</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/hero2.png' %}" alt="Hero Image 2">
+                    <div class="slide-caption">
+                        <h2>CONSIDERED ONE OF THE TOP</h2>
+                        <p>Ranked Schools In Country</p>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/hero3.jpg' %}" alt="Hero Image 3">
+                <div class="slide-caption">
+                    <h2>Empowering Future Leaders</h2>
+                    <p>Education that inspires excellence.</p>
+                </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/hero4.jpg' %}" alt="Hero Image 4">
+                <div class="slide-caption">
+                    <h2>Top Professionals</h2>
+                    <p>Where great minds get natured by highly qualified teachers.</p>
+                </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/hero5.jpg' %}" alt="Hero Image 5">
+                <div class="slide-caption">
+                    <h2>Motivation</h2>
+                    <p>Renowned motivational speakers are invited from outside to engage <br>in interactive sessions focused on educational topics.</p>
+                </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="{% static 'images/hero6.jpg' %}" alt="Hero Image 6">
+                <div class="slide-caption">
+                    <h2>Encouraging growth</h2>
+                    <p>Students come together to bring ideas in solving technical issues</p>
+                </div>
+                </div>
+            </div>
+
+            <!-- Pagination and Arrows -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- Optional content overlay -->
+        </div>
+    </section>
+
+
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="features-content">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Scholarship Facility</h3>
+                <p>Comprehensive scholarship programs to support deserving students in their educational journey and help them achieve their academic goals.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3>Books & Library</h3>
+                <p>Extensive library resources with thousands of books, digital materials, and research facilities to enhance learning experiences.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>Certified Teachers</h3>
+                <p>Highly qualified and experienced faculty members dedicated to providing quality education and personalized attention to each student.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>ABOUT US</h2>
+            <p class="about-text">Building futures through excellence in education and character development.</p>
+
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="{% static 'images/classroom.jpg' %}" alt="Students in Classroom Environment" />
+                </div>
+
+                <div class="welcome-section">
+                    <h3>WELCOME TO TOPEX HIGH</h3>
+                    <p>At Topex High School, we are committed to providing exceptional education that prepares students for success in an ever-changing world.</p>
+
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                Academic Excellence Program
+                            </div>
+                            <div class="accordion-content">
+                                <p>Our rigorous academic curriculum is designed to challenge students while providing the support they need to excel.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                Character Development Initiative
+                            </div>
+                            <div class="accordion-content">
+                                <p>We focus on developing well-rounded individuals with strong moral values, leadership skills, and social responsibility.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                Extracurricular Activities
+                            </div>
+                            <div class="accordion-content">
+                                <p>We offer a wide range of extracurricular activities to help students discover their passions and talents.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="courses">
+        <div class="courses-content">
+            <h2>OUR MAIN COURSES</h2>
+            <p class="courses-subtitle">Comprehensive education programs designed for student success</p>
+
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="{% static 'images/lab.jpg' %}" alt="Science Laboratory">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Science</div>
+                        <div class="course-title">Advanced Sciences</div>
+                        <div class="course-description">Comprehensive science education with hands-on experiences and research.</div>
+                        <button class="apply-btn">APPLY NOW</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="{% static 'images/math.jpg' %}" alt="Mathematics Classroom">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Mathematics</div>
+                        <div class="course-title">Advanced Mathematics</div>
+                        <div class="course-description">Curriculum including Algebra, Geometry, Calculus, and Statistics.</div>
+                        <button class="apply-btn">APPLY NOW</button>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image">
+                        <img src="{% static 'images/arts.jpg' %}" alt="Literature & Arts">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Humanities</div>
+                        <div class="course-title">Humanities & Arts</div>
+                        <div class="course-description">Literature, History, Fine Arts — fostering creativity and thought.</div>
+                        <button class="apply-btn">APPLY NOW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Achievements Section -->
+    <section class="achievements">
+        <div class="achievements-content">
+            <h2>ACHIEVEMENTS</h2>
+            <p class="achievements-text">Our commitment to excellence has resulted in outstanding achievements and recognition.</p>
+
+            <div class="achievements-grid">
+                <div class="graduation-image">
+                    <img src="{% static 'images/performance.png' %}" alt="Perfomance" />
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="stat-number">OVER 1000</div>
+                        <div class="stat-label">TOP STUDENTS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-award"></i></div>
+                        <div class="stat-number">OVER 200</div>
+                        <div class="stat-label">CERTIFIED TEACHERS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-building"></i></div>
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">STUDENT INSTITUTIONS COUNTRYWIDE</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number">574</div>
+                        <div class="stat-label">STUDENTS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

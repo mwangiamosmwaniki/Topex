@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm p-4">
+    <h2 class="mb-3 text-primary">Welcome, {{ applicant.first_name }}!</h2>
+    <p class="text-muted">Here are your course applications:</p>
+
+    {% if applications %}
+      <div class="table-responsive">
+        <table class="table table-hover align-middle table-bordered">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col">📘 Course</th>
+              <th scope="col">🗓 Date Applied</th>
+              <th scope="col">📌 Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for application in applications %}
+              <tr>
+                <td>{{ application.course.name }}</td>
+                <td>{{ application.date_applied|date:"M d, Y H:i" }}</td>
+                <td>
+                  {% if application.status == 'P' %}
+                    <span class="badge bg-warning text-dark">⏳ Pending</span>
+                  {% elif application.status == 'A' %}
+                    <span class="badge bg-success">✅ Accepted</span>
+                  {% else %}
+                    <span class="badge bg-danger">❌ Rejected</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <div class="alert alert-info mt-3" role="alert">
+        You have not applied for any courses yet.
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

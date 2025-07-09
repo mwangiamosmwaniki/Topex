@@ -1,0 +1,2027 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Topex High School{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Include Font Awesome and your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Header Styles */
+.top-bar {
+    background: linear-gradient(135deg, #c41e3a, #8b1538);
+    color: white;
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+.top-bar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.news-ticker {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.news-item {
+    animation: slideIn 15s infinite linear;
+}
+
+@keyframes slideIn {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+.social-links {
+    display: flex;
+    gap: 10px;
+}
+
+.social-links a {
+    color: white;
+    font-size: 16px;
+    transition: transform 0.3s;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+/* Main Header */
+.main-header {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap; /* allows wrapping on very small screens */
+}
+
+/* Logo image */
+.logo-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 5px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+/* School name text */
+.school-name .school-title {
+    color: #FFAA1D;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* Extra responsiveness for tablets and phones */
+@media (max-width: 768px) {
+    .school-name .school-title {
+        font-size: 1.2rem;
+    }
+
+    .logo-img {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .school-name .school-title {
+        font-size: 1rem;
+    }
+
+    .logo-img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+.contact-info {
+    text-align: right;
+}
+
+.contact-info .phone {
+    font-size: 18px;
+    font-weight: bold;
+    color: #c41e3a;
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #c41e3a, #8b1538);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg,rgb(0, 133, 22),rgb(49, 5, 18));
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+}
+/* Navigation */
+.nav-menu {
+    background: #f8f9fa;
+    padding: 0;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 15px 0;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: #c41e3a;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #c41e3a;
+    transition: width 0.3s;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.hero {
+    position: relative;
+    height: 480px;
+    width: 100%;
+}
+
+.hero-swiper .swiper-slide img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 13;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 5%;
+    left: 30%;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90%;
+}
+
+.slide-caption h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.slide-caption p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero {
+        height: 300px;
+    }
+
+    .slide-caption {
+        padding: 10px;
+        bottom: 15%;
+        left: 5%;
+    }
+
+    .slide-caption h2 {
+        font-size: 1.5rem;
+    }
+
+    .slide-caption p {
+        font-size: 1rem;
+    }
+}
+
+.course-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+
+/* Features Section */
+.features {
+    background: white;
+    color: white;
+    padding: 60px 0;
+    margin-top: 60px;
+}
+
+.features-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.feature-card {
+    text-align: center;
+    padding: 25px 20px;
+    background: rgb(210, 4, 45);
+    border-radius: 15px;
+    transition: transform 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeSlideUp 0.8s ease-out forwards;
+}
+
+/* Delay each card animation slightly for staggered effect */
+.feature-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.feature-card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.feature-card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+@keyframes fadeSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.feature-card p {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Optional: Reduce padding on very small screens */
+@media (max-width: 480px) {
+    .features {
+        padding: 40px 0;
+    }
+
+    .feature-card {
+        padding: 20px 15px;
+    }
+
+    .feature-icon {
+        font-size: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .features-content {
+        margin-top: 100px;
+    }
+}
+
+
+
+/* About Section */
+.about {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-text {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 18px;
+    color: #666;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-image {
+    background: linear-gradient(45deg, #ddd, #eee);
+    height: 400px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #666;
+}
+
+.welcome-section h3 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.accordion {
+    margin-top: 30px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background: #c41e3a;
+    color: white;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background: #8b1538;
+}
+
+.accordion-content {
+    padding: 20px;
+    background: white;
+    display: none;
+}
+
+.accordion-content.active {
+    display: block;
+}
+
+/* Courses Section */
+.courses {
+    padding: 80px 0;
+    background: white;
+}
+
+.courses-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.courses h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.courses-subtitle {
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 18px;
+    color: #666;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+}
+
+.course-image {
+    height: 200px;
+    background: linear-gradient(45deg, #ddd, #eee);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #666;
+}
+
+.course-content {
+    padding: 25px;
+}
+
+.course-category {
+    color: #c41e3a;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.course-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.course-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.apply-btn {
+    background: linear-gradient(135deg, #c41e3a, #8b1538);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.apply-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Achievements Section */
+.achievements {
+    background: linear-gradient(135deg, #7EC8E3, #2c3e50);
+    color: white;
+    padding: 80px 0;
+}
+
+.achievements-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.achievements h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.achievements-text {
+    font-size: 18px;
+    margin-bottom: 60px;
+    line-height: 1.6;
+}
+
+.achievements-grid {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.graduation-image {
+    flex: 1;
+    height: 550px;
+    background: linear-gradient(45deg, #555, #777);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+}
+.graduation-image img {
+    max-width: 98%;    /* Reduce image width */
+    max-height: 99%;   /* Ensure it scales inside the container */
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.stats-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+}
+
+.stat-icon {
+    font-size: 48px;
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23333" width="1200" height="400"/></svg>');
+    color: white;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #c41e3a;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.contact-info-footer {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.contact-info-footer i {
+    font-size: 20px;
+    color: #c41e3a;
+}
+
+.social-footer {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-footer a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: #c41e3a;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.social-footer a:hover {
+    transform: scale(1.1);
+}
+
+.complain-btn {
+    background: linear-gradient(135deg, #c41e3a, #8b1538);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s;
+}
+
+.complain-btn:hover {
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+    color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .nav-menu ul {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .hero h2 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .achievements-grid {
+        flex-direction: column;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-section {
+  background-color: rgb(41, 41, 41);
+  padding: 50px 20px;
+  color: white;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.contact-wrapper {
+  background-color: rgb(0, 0, 0);
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: nowrap; /* prevent wrapping */
+  justify-content: space-between;
+  gap: 10px; /* tighter spacing */
+  padding: 30px 20px;
+  min-width: 1100px; /* force horizontal scroll if needed */
+}
+
+/* Columns */
+.footer-column,
+.contact-form-block {
+  flex: 1 1 0;
+  min-width: 220px;
+  max-width: 280px;
+  margin: 0 5px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-column h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #ffcc00;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #ccc;
+}
+
+.footer-column ul li a:hover {
+  color: #ffffff;
+}
+
+/* Connect With Us - Flexbox Layout */
+.connect-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.connect-flex .social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.connect-flex .social-links li {
+  display: flex;
+  align-items: center;
+}
+
+.connect-flex .social-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #ccc;
+  font-size: 15px;
+}
+
+.connect-flex .social-links a:hover {
+  color: #fff;
+}
+
+/* Contact Items */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.contact-item i {
+  color: #ffcc00;
+  font-size: 18px;
+}
+
+/* Social Icons */
+.social-links i {
+  color: #ffcc00;
+}
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+  .contact-wrapper {
+    flex-wrap: wrap;
+    min-width: 100%;
+    padding: 30px 15px;
+    gap: 20px;
+  }
+
+  .footer-column {
+    max-width: 45%;
+    flex: 1 1 45%;
+  }
+}
+
+/* Small screens (phones) */
+@media (max-width: 600px) {
+  .footer-column {
+    max-width: 100%;
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
+
+  .contact-wrapper {
+    padding: 20px 10px;
+  }
+
+  .contact-section {
+    padding: 40px 15px;
+  }
+
+  .connect-flex .social-links a {
+    font-size: 14px;
+  }
+
+  .footer-column h4 {
+    font-size: 16px;
+  }
+}
+
+/* Contact Form */
+/* Outer section block styling */
+.contact-block {
+  background: linear-gradient(135deg, #D0C8E0, #EAE86F);
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Inner form card */
+.contact-form-block {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Header */
+.contact-form-block h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: #8b4513;
+}
+
+/* Form inputs and textarea */
+#contact-form input,
+#contact-form textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+  border-color: #ffaa1d;
+  box-shadow: 0 0 0 3px rgba(255, 170, 29, 0.15);
+  outline: none;
+}
+
+/* Submit button */
+#contact-form button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #DC143C;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#contact-form button:hover {
+  background-color: #EE4264;
+}
+
+/* Feedback message */
+#contact-message-box {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+/* Entry animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .contact-form-block {
+    padding: 1.5rem;
+  }
+
+  .contact-form-block h3 {
+    font-size: 1.5rem;
+  }
+
+  #contact-form button {
+    font-size: 1rem;
+  }
+}
+
+
+/* MAP */
+.map {
+  width: 100%;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1f2937, #111827); /* dark gradient */
+  border-top: 2px solid #333;
+  border-bottom: 2px solid #333;
+}
+
+.map-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+  display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .map-container iframe {
+    height: 300px;
+  }
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-wrapper {
+    flex-direction: column;
+  }
+}
+
+
+.scroll-top {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: #c41e3a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+.scroll-top.visible {
+    opacity: 1;
+}
+/* Courses Section */
+.courses {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.courses-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.courses-content h2 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: #222;
+}
+
+.courses-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #666;
+}
+
+/* Grid for course cards */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 0 10px;
+}
+
+/* Individual course card */
+.course-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.15);
+}
+
+/* Category label on image area */
+.course-image {
+  background-color: #004aad;
+  padding: 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #003080;
+}
+
+/* Course content area */
+.course-content {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.course-category {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0070f3;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.course-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #222;
+}
+
+.course-description {
+  font-size: 1rem;
+  color: #555;
+  flex-grow: 1;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* Apply button */
+.apply-btn {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.apply-btn:hover {
+  background-color: #005bb5;
+}
+/* Dropdown base styles */
+.nav-menu ul li.dropdown {
+  position: relative;
+}
+
+/* Hide dropdown menu initially */
+.nav-menu ul li .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 10px 0;
+  list-style: none;
+  margin: 0;
+  z-index: 1000;
+}
+
+/* Show dropdown on hover of parent li */
+.nav-menu ul li.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+
+/* Style links inside dropdown */
+.nav-menu ul li .dropdown-menu li a {
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.nav-menu ul li .dropdown-menu li a:hover {
+  background-color: #f5f5f5;
+  color: #c41e3a;
+}
+#contact-message-box {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
+#contact-message-box.hidden {
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    padding: 2rem 1rem;
+  }
+
+  .about-content {
+    text-align: center;
+  }
+
+  .about-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .top-bar {
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+  }
+
+  .top-bar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .news-ticker {
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none;  /* IE/Edge */
+    width: 100%;
+  }
+
+  .news-ticker::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in Chrome/Safari */
+  }
+
+  .news-item {
+    margin-right: 1.5rem;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .contact-email {
+    text-align: center;
+    width: 100%;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .contact-email i {
+    margin-right: 0.3rem;
+  }
+}
+
+  footer {
+    background-color:rgb(1, 0, 27);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.95rem;
+    color:rgb(253, 254, 255);
+  }
+
+  footer i {
+    color: var(--primary-color);
+  }
+  footer small{
+  color:rgba(255, 255, 255, 0.75);
+}
+.log-nav {
+  background-color: rgb(214, 42, 79);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+.log-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+  position: relative;
+}
+
+.log-nav ul li {
+  position: relative;
+}
+
+.log-nav ul li a {
+  position: relative;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 50rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.log-nav ul li a:hover {
+  color: #000000;
+  transform: translateY(-2px);
+}
+
+.log-nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #fff;
+  transition: width 0.3s ease-in-out;
+  border-radius: 1px;
+}
+
+.log-nav ul li a:hover::after {
+  width: 100%;
+}
+/* ——— desktop / default ——— */
+.log-nav {
+  background-color: rgb(214, 42, 79);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+}
+
+.log-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.log-nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 50rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.log-nav ul li a:hover {
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* underline effect */
+.log-nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s;
+}
+.log-nav ul li a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 767.98px) {
+
+  .log-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 230px;
+    background-color: rgb(214, 42, 79);
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 8px 14px rgba(0,0,0,.15);
+    overflow: hidden;
+    max-height: 0;
+    padding: 0; /* important */
+    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+    z-index: 999;
+  }
+
+  .log-nav.open {
+    max-height: 600px;
+    padding: 1rem 1rem;
+  }
+
+  .log-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .log-nav ul li a {
+    display: block;
+    text-align: left;
+    padding: 0.7rem 1rem;
+    color: #fff;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+
+  .log-nav-toggle {
+    display: block;
+    background: rgb(214, 42, 79);
+    border: none;
+    color: #fff;
+    padding: 0.5rem 0.9rem;
+    font-size: 1.25rem;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    z-index: 1000;
+  }
+}
+
+
+#chatbot-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #c41e3a;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.chatbot-popup {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  max-height: 500px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.chat-header {
+  background: #c41e3a;
+  color: white;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-window {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+
+.chat-window .bot-msg,
+.chat-window .user-msg {
+  margin: 5px 0;
+  padding: 8px 12px;
+  border-radius: 20px;
+  max-width: 80%;
+  display: inline-block;
+  word-break: break-word;
+}
+
+.bot-msg {
+  background: #e2e2e2;
+  color: #000;
+  align-self: flex-start;
+}
+
+.user-msg {
+  background: #c41e3a;
+  color: #fff;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.chat-input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+#chat-input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+#chat-send-btn {
+  border: none;
+  background: #c41e3a;
+  color: white;
+  padding: 0 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 90px; /* Adjusted to sit above other buttons (like message/chat) */
+  right: 25px;
+  z-index: 999;
+  display: none;
+  background-color: #c41e3a;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: #a01032;
+}
+
+</style>
+
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="news-ticker">
+                <span><strong>Latest News:</strong></span>
+                <div class="news-item">2025 Date Sheet Final Exam Nursery to Sr.Kg</div>
+                <div class="news-item">01 February 2025 Board Exams Preparation</div>
+            </div>
+            <div class="contact-email">
+                <i class="fas fa-envelope"></i> topexhightest@gmail.com
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section d-flex align-items-center gap-3">
+                <a href="{% url 'core:home' %}">
+                    <img src="{% static 'images/topex-logo.png' %}" alt="Topex Logo" class="logo-img shadow-sm">
+                </a>
+                <div class="school-name">
+                    <h1 class="school-title">Topex High School</h1>
+                </div>
+            </div>
+
+            <div class="log-nav">
+              <ul>
+                  <li><a href="{% url 'core:student_dashboard' %}">E-Learning</a></li>
+                  <li><a href="{% url 'student_portal:login' %}">Student Portal</a></li>
+                  <li><a href="{% url 'lecturers:login' %}">Staff Portal</a></li>
+                  <li><a href="{% url 'events:event_list' %}">Events</a></li>
+                  <li><a href="{% url 'gallery:gallery_home' %}">Gallery</a></li>
+                  <li><a href="{% url 'calendars:calendar_home' %}">Calendar</a></li>
+              </ul>
+            </div>
+            <button id="logNavToggle" class="log-nav-toggle d-md-none">
+              <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+     {% block navbar %}
+    <nav class="nav-menu">
+    <div class="nav-content">
+        <ul>
+            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li class="dropdown">
+                <a href="{% url 'academics:department_list' %}">Academics</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'academics:department_list' %}">Departments</a></li>
+                    <li><a href="{% url 'courses:course_list' %}">Course</a></li>
+                    <li><a href="{% url 'calendars:calendar_home' %}">Academic Calendar</a></li>
+                </ul>
+            </li>
+
+            <li>
+                {% if applicant %}
+                    <a href="{% url 'admissions:dashboard' applicant.id %}">Admissions</a>
+                {% else %}
+                    <a href="{% url 'admissions:apply' %}">Admissions</a>
+                {% endif %}
+            </li>
+
+            <li><a href="{% url 'results:view_results' %}">Results</a></li>
+            <li><a href="{% url 'news:news_list' %}">News</a></li>
+            <li><a href="{% url 'events:event_list' %}">Events</a></li>
+            <li><a href="{% url 'gallery:gallery_home' %}">Gallery</a></li>
+            <li><a href="{% url 'calendars:calendar_home' %}">Calendar</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+    {% endblock %}
+
+        <!-- Main Content -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+<section class="map">
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.920248881
+        7878!2d36.91767914102169!3d-1.2156950956178725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!
+        1s0x182f3fd80f8da691%3A0x1228d571c32cb5f1!2sACK%20St.%20Timothy%20Parish%20Githurai45!5e0!3m2!1s
+        en!2ske!4v1740149253389!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen=""
+        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+<div id="chatbot-button" onclick="toggleChatbot()">
+  💬 Chat
+</div>
+
+<div id="chatbot-popup" class="chatbot-popup d-none">
+  <div class="chat-header">
+    <strong>Topex Bot</strong>
+    <button onclick="toggleChatbot()" class="close-btn">&times;</button>
+  </div>
+  <div class="chat-window" id="chat-window">
+    <div class="bot-msg">Hi! 👋 What’s your name?</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Type your response..." autocomplete="off">
+    <button id="chat-send-btn">Send</button>
+  </div>
+</div>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-wrapper">
+    <!-- Column 1: Logo & Info -->
+    <div class="footer-column">
+      <div class="logo-section">
+        <img src="{% static 'images/topex-logo.png' %}" alt="Topex Logo" class="logo-img">
+      </div>
+      <p>Reach us </p>
+      <div class="contact-item">
+        <i class="fab fa-whatsapp"></i>
+        <a href="https://wa.me/{{ contact_info.whatsapp }}" target="_blank">{{ contact_info.whatsapp }}</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:{{ contact_info.phone }}">{{ contact_info.phone }}</a>
+      </div>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-column">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home Page</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Support Center</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Feedback Form</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Resources -->
+    <div class="footer-column">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Course Catalog</a></li>
+        <li><a href="#">Library Access</a></li>
+        <li><a href="#">Event Calendar</a></li>
+        <li><a href="#">News & Updates</a></li>
+        <li><a href="#">Alumni Network</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Connect With Us -->
+    <div class="footer-column connect-flex">
+      <h4>Connect With Us</h4>
+      <ul class="social-links">
+        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+  <footer>
+    <div class="container">
+      <p class="mb-1">
+        <i class="bi bi-mortarboard-fill me-2"></i><strong>Topex High School</strong>
+      </p>
+      <p class="mb-1">&copy; {{ year|default:2025 }} Topex High. All rights reserved.</p>
+      <small>Empowering students through digital excellence</small>
+    </div>
+  </footer>
+  <button onclick="scrollToTop()" id="scrollTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+    {% block extra_scripts %}{% endblock %}
+</body>
+<script>
+  const swiper = new Swiper('.hero-swiper', {
+    loop: true,
+    effect: 'fade', // for fade transitions
+    autoplay: {
+      delay: 7000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contact-form');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    const formData = {
+      name: form.querySelector('[name="name"]').value,
+      email: form.querySelector('[name="email"]').value,
+      message: form.querySelector('[name="message"]').value
+    };
+
+    try {
+      const response = await fetch("{% url 'core:contact' %}", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const result = await response.json();
+
+      // Create or reuse the message box
+      let messageBox = document.getElementById('contact-message-box');
+      if (!messageBox) {
+        messageBox = document.createElement('div');
+        messageBox.id = 'contact-message-box';
+        form.parentElement.insertBefore(messageBox, form);
+      }
+
+      messageBox.textContent = result.message;
+      messageBox.style.marginTop = '10px';
+      messageBox.style.padding = '10px';
+      messageBox.style.borderRadius = '5px';
+      messageBox.style.fontWeight = 'bold';
+      messageBox.style.color = result.success ? '#22DD22' : '#721c24';
+
+      // Clear form on success
+      if (result.success) {
+        form.reset();
+      }
+
+      // Auto-hide after 3 seconds
+      setTimeout(() => {
+        messageBox.textContent = '';
+        messageBox.style.padding = '0';
+        messageBox.style.backgroundColor = 'transparent';
+      }, 3000);
+
+    } catch (error) {
+      alert('An unexpected error occurred.');
+      console.error('Submission error:', error);
+    }
+  });
+});
+document.addEventListener('DOMContentLoaded', function () {
+  const toggle = document.getElementById('logNavToggle');
+  const logNav = document.querySelector('.log-nav');
+
+  if (toggle && logNav) {
+    toggle.addEventListener('click', () => logNav.classList.toggle('open'));
+  }
+});
+
+let step = 0;
+let userData = {};
+
+function toggleChatbot() {
+  document.getElementById('chatbot-popup').classList.toggle('d-none');
+}
+
+function appendMessage(msg, sender = 'bot') {
+  const div = document.createElement('div');
+  div.classList.add(sender === 'bot' ? 'bot-msg' : 'user-msg');
+  div.textContent = msg;
+  document.getElementById('chat-window').appendChild(div);
+  document.getElementById('chat-window').scrollTop = document.getElementById('chat-window').scrollHeight;
+}
+
+function processInput(input) {
+  if (step === 0) {
+    userData.name = input;
+    appendMessage(input, 'user');
+    setTimeout(() => {
+      appendMessage(`Nice to meet you, ${input}! What's your email?`);
+    }, 500);
+    step++;
+  } else if (step === 1) {
+    userData.email = input;
+    appendMessage(input, 'user');
+    setTimeout(() => {
+      appendMessage(`Great! What's your message?`);
+    }, 500);
+    step++;
+  } else if (step === 2) {
+    userData.message = input;
+    appendMessage(input, 'user');
+    setTimeout(() => {
+      appendMessage("Sending your message...");
+      sendMessageToBackend(userData);
+    }, 500);
+    step++;
+  }
+}
+
+function sendMessageToBackend(data) {
+  fetch("{% url 'core:contact' %}", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': '{{ csrf_token }}'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(res => {
+    if (res.success) {
+      appendMessage("✅ Message sent! We'll reach out soon.");
+    } else {
+      appendMessage("❌ Error: " + res.message);
+    }
+  })
+  .catch(() => {
+    appendMessage("❌ Failed to send message. Please try again.");
+  });
+}
+
+document.getElementById('chat-send-btn').addEventListener('click', () => {
+  const input = document.getElementById('chat-input').value.trim();
+  if (input) {
+    processInput(input);
+    document.getElementById('chat-input').value = '';
+  }
+});
+
+document.getElementById('chat-input').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    document.getElementById('chat-send-btn').click();
+  }
+});
+
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  window.onscroll = function () {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+</script>
+</html>

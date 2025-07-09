@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h3>Departments</h3>
+  <ul class="list-group">
+    {% for dept in departments %}
+      <li class="list-group-item">
+        <strong>{{ dept.name }}</strong><br>
+        {{ dept.description|truncatewords:20 }}<br>
+        {% if dept.programs.first %}
+          <a href="{% url 'academics:program_detail' dept.programs.first.id %}">View Programs</a>
+        {% else %}
+          <em>No programs available</em>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

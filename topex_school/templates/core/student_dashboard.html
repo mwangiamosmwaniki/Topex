@@ -1,0 +1,27 @@
+{% extends 'core/students/base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+<!-- Dashboard Content -->
+<div class="container mt-4">
+  <h2 class="fw-bold" style="color:rgb(88, 4, 32);">Hi, {{ student.first_name }}! 👋</h2>
+
+  <div class="mt-4">
+    <h4 class="fw-semibold border-bottom pb-2">Recently accessed units</h4>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
+      {% for unit in recent_units %}
+      <div class="col">
+        <div class="card h-100 shadow-sm rounded" style="background: {{ unit.bg_color|default:'#5a1a2b' }};">
+          <div class="card-body text-white">
+            <h6 class="card-title">{{ unit.code }}: {{ unit.title|truncatechars:30 }}</h6>
+            <p class="card-text small">{{ unit.program.name }}</p>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No recently accessed units found.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

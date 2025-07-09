@@ -1,0 +1,76 @@
+{% extends 'student_portal/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  .profile-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2563eb;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-label {
+    font-weight: 600;
+    color: #555;
+  }
+
+  .profile-value {
+    color: #222;
+  }
+
+  .profile-row {
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 576px) {
+    .profile-title {
+      font-size: 1.5rem;
+    }
+
+    .profile-container {
+      padding: 1.5rem;
+      margin: 2rem 1rem;
+    }
+  }
+</style>
+
+<div class="profile-container">
+  <h2 class="profile-title">Student Profile</h2>
+  <div class="row profile-row">
+    <div class="col-md-4 profile-label">Full Name:</div>
+    <div class="col-md-8 profile-value">{{ profile.full_name }}</div>
+  </div>
+  <div class="row profile-row">
+    <div class="col-md-4 profile-label">Admission Number:</div>
+    <div class="col-md-8 profile-value">{{ profile.admission_number }}</div>
+  </div>
+  <div class="row profile-row">
+    <div class="col-md-4 profile-label">Course:</div>
+    <div class="col-md-8 profile-value">{{ profile.course }}</div>
+  </div>
+  <div class="row profile-row">
+    <div class="col-md-4 profile-label">Year of Study:</div>
+    <div class="col-md-8 profile-value">{{ profile.year_of_study }}</div>
+  </div>
+  <div class="row profile-row">
+    <div class="col-md-4 profile-label">Email:</div>
+    <div class="col-md-8 profile-value">{{ profile.user.email }}</div>
+  </div>
+  <div class="row profile-row">
+    <div class="col-md-4 profile-label">Phone:</div>
+    <div class="col-md-8 profile-value">{{ profile.phone }}</div>
+  </div>
+  <a href="{% url 'student_portal:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+</div>
+{% endblock %}

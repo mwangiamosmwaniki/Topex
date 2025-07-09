@@ -1,0 +1,51 @@
+{% extends 'lecturers/base.html' %}
+{% block content %}
+<style>
+  .timetable-card {
+    border: none;
+    background-color: var(--card-bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+
+  body.dark-mode .timetable-card {
+    background-color: var(--card-bg-dark);
+    color: var(--text-light);
+  }
+
+  .timetable-day {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+  }
+
+  .timetable-details {
+    color: var(--text-dark);
+  }
+
+  body.dark-mode .timetable-details {
+    color: var(--text-light);
+  }
+</style>
+
+<div class="mb-4">
+  <h2 class="fw-bold">🗓️ Your Timetables</h2>
+</div>
+
+{% if timetables %}
+  {% for timetable in timetables %}
+    <div class="timetable-card">
+      <div class="timetable-day">{{ timetable.day }}</div>
+      <div class="timetable-details">{{ timetable.unit.name }} - {{ timetable.time }}</div>
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="alert alert-info" role="alert">
+    No timetable entries found.
+  </div>
+{% endif %}
+{% endblock %}

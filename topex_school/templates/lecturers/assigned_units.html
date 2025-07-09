@@ -1,0 +1,51 @@
+{% extends 'lecturers/dashboard.html' %}
+{% block content %}
+<style>
+  .unit-card {
+    border: none;
+    border-left: 5px solid var(--primary-color);
+    background-color: var(--card-bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+  }
+
+  body.dark-mode .unit-card {
+    background-color: var(--card-bg-dark);
+    color: var(--text-light);
+  }
+
+  .unit-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+
+  .unit-meta {
+    color: var(--text-dark);
+  }
+
+  body.dark-mode .unit-meta {
+    color: var(--text-light);
+  }
+</style>
+
+<div class="mb-4">
+  <h2 class="fw-bold">📚 Your Assigned Units</h2>
+</div>
+
+{% if units %}
+  {% for unit in units %}
+    <div class="unit-card">
+      <div class="unit-title">{{ unit.title }} <span class="text-muted">({{ unit.code }})</span></div>
+      {% comment %} <div class="unit-meta">Course: {{ program.name }}</div> {% endcomment %}
+    </div>
+  {% endfor %}
+{% else %}
+  <div class="alert alert-warning" role="alert">
+    You have not been assigned any units yet.
+  </div>
+{% endif %}
+{% endblock %}

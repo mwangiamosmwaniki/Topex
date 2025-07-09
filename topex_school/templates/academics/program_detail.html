@@ -1,0 +1,16 @@
+{% extends 'core/students/base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+  <h3>Program: {{ program.name }}</h3>
+  <h5>Units:</h5>
+  <ul class="list-group">
+    {% for unit in program.units.all %}
+      <li class="list-group-item">
+        {{ unit.code }} - {{ unit.title }} (Year {{ unit.year }}, Sem {{ unit.semester }})
+        <a href="{% url 'academics:unit_detail' unit.id %}" class="btn btn-sm btn-outline-secondary float-end">Notes</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
